@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% from "radios/macro.njk" import govukRadios %}
+
+{% block content %}
+<form method="POST" action="/access">
+{{ govukRadios({
+  classes: "govuk-radios--inline",
+  idPrefix: "access",
+  name: "access",
+  fieldset: {
+    legend: {
+      text: "Can you still access the property?",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--xl"
+    }
+  },
+  hint: {
+    text: "The property must be accessed safely"
+  },
+  items: [
+    {
+      value: true,
+      text: "Yes"
+    },
+    {
+      value: false,
+      text: "No"
+    }
+  ]
+}) }}
+
+{% from "button/macro.njk" import govukButton %}
+
+{{ govukButton({
+  text: "Save and continue"
+}) }}
+</form>
+{% endblock %}

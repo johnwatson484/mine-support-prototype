@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% from "checkboxes/macro.njk" import govukCheckboxes %}
+
+{% block content %}
+<form method="POST" action="/type">
+{{ govukCheckboxes({
+  idPrefix: "type",
+  name: "type",
+  fieldset: {
+    legend: {
+      text: "Which type of mine is it?",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--xl"
+    }
+  },
+  hint: {
+    text: "Select all that apply."
+  },
+  items: [
+    {
+      value: "gold",
+      text: "Gold"
+    },
+    {
+      value: "coal",
+      text: "Coal"
+    },
+    {
+      value: "other",
+      text: "Other"
+    }
+  ]
+}) }}
+
+{{ govukButton({
+  text: "Save and continue"
+}) }}
+</form>
+{% endblock %}
