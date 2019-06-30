@@ -1,6 +1,8 @@
 // Core dependencies
 const path = require('path')
 const fs = require('fs')
+require('dotenv').config()
+const sequelize = require('sequelize-heroku').connect(require('sequelize'))
 
 checkFiles()
 
@@ -79,4 +81,21 @@ function runGulp () {
   gulp.on('exit', function (code) {
     console.log('gulp exited with code ' + code.toString())
   })
+}
+
+// Connect to database
+if (sequelize) {
+  sequelize.authenticate().then(function () {
+    var config = sequelize.connectionManager.config
+    console.log('sequelize-heroku: Connected to ' + config.host + ' as ' + config.username + '.')
+
+    sequelize.query('SELECT 1+1 as test').then(function (res) {
+      console.log('1+1=' + res[0][0].test)
+    })
+  }).catch(function (err) {
+    var config = sequelize.connectionManager.config
+    console.log('Sequelize: Error connecting ' + config.host + ' as ' + config.user + ': ' + err)
+  })
+} else {
+  console.log('No environnement variable found.')
 }
