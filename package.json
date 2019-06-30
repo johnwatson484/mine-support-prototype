@@ -7,7 +7,7 @@
     "node": "^10.0.0"
   },
   "scripts": {
-    "start": "node start.js",
+    "start": "sequelize db:migrate && sequelize db:seed:all && node start.js",
     "lint": "standard",
     "test": "npm run lint && gulp generate-assets && jest"
   },
@@ -44,6 +44,7 @@
     "prompt": "^1.0.0",
     "require-dir": "^1.0.0",
     "sequelize": "^5.9.0",
+    "sequelize-cli": "^5.5.0",
     "sequelize-heroku": "^2.1.0",
     "sync-request": "^6.0.0",
     "universal-analytics": "^0.4.16",
