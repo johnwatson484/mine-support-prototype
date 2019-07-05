@@ -97,5 +97,5 @@ if (sequelize) {
     console.log('Sequelize: Error connecting ' + config.host + ' as ' + config.user + ': ' + err)
   })
 } else {
-  console.log('No environnement variable found.')
+  console.log('No environment variable found.')
 }
